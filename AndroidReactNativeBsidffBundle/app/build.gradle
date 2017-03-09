@@ -1,0 +1,36 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "24.0.3"
+
+    defaultConfig {
+        applicationId "pk.com.reactnativebsidffbundle"
+        minSdkVersion 16
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        ndk {
+            abiFilters "armeabi-v7a", "x86"
+        }
+        packagingOptions {
+            exclude "lib/arm64-v8a/librealm-jni.so"
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile project(path: ':LibBSdiff')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile 'com.android.support:appcompat-v7:23+'
+    compile("com.facebook.react:react-native:+")
+    // Gson
+    compile 'com.google.code.gson:gson:2.7'
+}
